@@ -37,7 +37,7 @@ Check Deposit: Customers can deposit checks electronically through mobile or des
 
 Real-time Transaction Updates: Users receive immediate notifications for account activity. Transaction History: Access to detailed transaction histories and statements.
 
-1.4 **Definitions, Acronyms and abbreviations Definitions:**
+ **1.4 Definitions, Acronyms and abbreviations Definitions:**
 
 <u>Account Holder:</u> An individual or an entity that holds an account with the financial institution.
 
@@ -71,7 +71,7 @@ MFA: Multi Factor Authentication
 
 **2.1 Product perspective UseCase Diagram**
 
-![](Aspose.Words.dbe0a35a-0354-4413-9a04-685750d9eb7b.001.jpeg)
+![UseCase](images/UseCase.jpeg)
 
 System:
 
@@ -86,7 +86,7 @@ The user registers to the application by providing personal details and bank acc
 
  **2.2 Product function ER diagram**
 
-![](Aspose.Words.dbe0a35a-0354-4413-9a04-685750d9eb7b.002.jpeg)
+![ERDiagram](images/ER%20Diagram.jpeg)
 
 The ER Diagram depicts the various entities to be considered when a transaction is initiated. The Bank will be identified by it’s IFSC Code which is unique in nature, each bank will have many accounts related to it. Each account will be identified by it’s Account No, the important thing to be safely guarded is the balance of each account. Each account will be held by a customer. The customer will have an ID and will have the contact details such as their phone number and their address.
 
@@ -174,9 +174,9 @@ We would require the bank's existing customer details to create the multi-bankin
 
 **6.0 Class diagram**
 
-![](Aspose.Words.dbe0a35a-0354-4413-9a04-685750d9eb7b.003.jpeg)
+![ClassDiagram](images/Class%20Diagram.jpeg)
 
 - The **Bank DAO** class is the Data Access Object class that contains common methods to all actors of the system that fetches required data from the Database. Interacts with Client, Admin and Technical Support classes
 - The **Client** and **Admin** classes capture data from respective users from the front-end wherein CRUD operations are performed and response is sent back. Interacts with Bank DAO and KYC classes.
-- **KYC** is a support class for the `Client` class that helps with client registration and authentication details.
+- **KYC** is a support class for the Client class that helps with client registration and authentication details.
 - **Technical Support** class is for the supporting actor enabling limited access to Client information that helps in guiding and supporting the client actor.
