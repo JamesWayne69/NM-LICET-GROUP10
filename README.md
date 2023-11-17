@@ -129,14 +129,14 @@ We would require the bank's existing customer details to create the multi-bankin
  **3.1 GUI**
  
  1. **Login Page**
-- ` `Clearly labeled text fields for users to enter their username and password.
-- ` `Placeholder text within the fields to guide users.
-- ` `A prominent button labeled "Login" to initiate the login process.
-- ` `A link or button for users to recover/reset their password.
-- ` `An option to remember the user's login credentials for future sessions.
-- ` `Clear error messages for incorrect login attempts.
-- ` `Indication of password strength if applicable.
-- ` `A link or button to navigate to the registration page for new users.
+- Clearly labeled text fields for users to enter their username and password.
+- Placeholder text within the fields to guide users.
+- A prominent button labeled "Login" to initiate the login process.
+- A link or button for users to recover/reset their password.
+- An option to remember the user's login credentials for future sessions.
+- Clear error messages for incorrect login attempts.
+- Indication of password strength if applicable.
+- A link or button to navigate to the registration page for new users.
 
 
 
