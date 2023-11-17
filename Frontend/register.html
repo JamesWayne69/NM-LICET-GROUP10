@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f5f5f5;
+    }
+
+    #register-container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 300px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #1976D2;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1565C0;
+    }
+
+    p {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="register-container">
+    <h2>Registration Page</h2>
+    <div>
+      <label for="email">Email:</label>
+      <input type="text" id="email" value="" />
+    </div>
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" value="" />
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" value="" />
+    </div>
+    <div>
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" value="" />
+    </div>
+    <p id="error-message" style="display: none;"></p>
+    <button onclick="handleRegister()">Register</button>
+  </div>
+
+  <script>
+    function handleRegister() {
+      var email = document.getElementById('email').value;
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      var confirmPassword = document.getElementById('confirmPassword').value;
+      var errorMessageElement = document.getElementById('error-message');
+      if (!validateEmail(email)) {
+        errorMessageElement.innerText = 'Invalid email address';
+        errorMessageElement.style.display = 'block';
+      } else if (username.trim() === '') {
+        errorMessageElement.innerText = 'Username is required';
+        errorMessageElement.style.display = 'block';
+      } else if (!validatePassword(password)) {
+        errorMessageElement.innerText = 'Invalid password. It should be at least 8 characters and contain a digit and a special character.';
+        errorMessageElement.style.display = 'block';
+      } else if (password !== confirmPassword) {
+        errorMessageElement.innerText = 'Passwords do not match';
+        errorMessageElement.style.display = 'block';
+      } else {
+        alert('Registration successful!');
+        errorMessageElement.style.display = 'none';
+      }
+    }
+
+    function validateEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    function validatePassword(password) {
+      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+      return passwordRegex.test(password);
+    }
+  </script>
+</body>
+
+</html>

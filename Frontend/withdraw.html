@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Withdraw Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+ #app-bar {
+      background-color: #1976D2; /* Material-UI primary color */
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #nav-links {
+      display: flex;
+    }
+
+    #nav-links a {
+      color: white;
+      margin-right: 15px;
+      text-decoration: none;
+    }
+
+    #container {
+      padding: 24px;
+      max-width: 400px;
+      margin: auto;
+      margin-top: 20px;
+      text-align: center;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #title {
+      margin-bottom: 16px;
+    }
+
+    #balance {
+      margin-bottom: 24px;
+      color: #4CAF50; /* Green color for balance */
+    }
+
+    #amount {
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    #error-message {
+      margin-top: 16px;
+      color: #f44336;
+    }
+
+    #withdraw-button {
+      background-color: #1976D2;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #withdraw-button:hover {
+      background-color: #1565C0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app-bar">
+    <div>Nova Banking</div>
+    <div id="nav-links">
+      <a href="home.html" style="color: white; margin-right: 15px;">Home</a>
+      <a href="about.html" style="color: white; margin-right: 15px;">About</a>
+      <a href="help.html" style="color: white; margin-right: 15px;">Help</a>
+      <a href="signout.html" style="color: white;">Sign Out</a>
+    </div>
+  </div>
+  <div id="container">
+    <h5 id="title">Withdraw Page</h5>
+    <p id="balance">Account Balance: $500</p>
+    <input type="number" id="amount" placeholder="Amount" />
+    <p id="error-message" style="display: none;"></p>
+    <button id="withdraw-button" onclick="handleWithdraw()">Withdraw</button>
+  </div>
+
+  <script>
+    function handleWithdraw() {
+      var amount = parseFloat(document.getElementById('amount').value);
+      var errorMessageElement = document.getElementById('error-message');
+
+      if (isNaN(amount) || amount <= 0) {
+        errorMessageElement.innerText = 'Please enter a valid positive amount';
+        errorMessageElement.style.display = 'block';
+      } else if (amount > 500) {
+        errorMessageElement.innerText = 'Insufficient funds';
+        errorMessageElement.style.display = 'block';
+      } else {
+        alert('Withdrawal of $' + amount + ' successful!');
+        errorMessageElement.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+
+</html>

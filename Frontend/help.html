@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+#app-bar {
+      background-color: #1976D2; /* Material-UI primary color */
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #nav-links {
+      display: flex;
+    }
+
+    #nav-links a {
+      color: white;
+      margin-right: 15px;
+      text-decoration: none;
+    }
+
+    h2 {
+      margin-top: 20px;
+    }
+
+    .faq-section {
+      margin-top: 20px;
+    }
+
+    .faq-section h5 {
+      margin-bottom: 8px;
+    }
+
+    .contact-details {
+      margin-top: 20px;
+    }
+
+    .query-section {
+      margin-top: 20px;
+    }
+
+    .query-section textarea {
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .error-message {
+      color: #f44336;
+    }
+
+    .success-message {
+      color: green;
+    }
+
+    .submit-button {
+      background-color: #1976D2;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      background-color: #1565C0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app-bar">
+    <div>Nova Banking</div>
+    <div id="nav-links">
+     <a href="home.html" style="color: white; margin-right: 15px;">Home</a>
+      <a href="about.html" style="color: white; margin-right: 15px;">About</a>
+      <a href="help.html" style="color: white; margin-right: 15px;">Help</a>
+      <a href="signout.html" style="color: white;">Sign Out</a>
+    </div>
+  </div>
+  <h2>Help Page</h2>
+
+  <div class="faq-section">
+    <h5>Frequently Asked Questions (FAQs)</h5>
+    <ul>
+      <li>Q: How do I reset my password?</li>
+      <li>A: You can reset your password by clicking on the "Forgot Password" link on the login page.</li>
+      <!-- Add more FAQs as needed -->
+    </ul>
+  </div>
+
+  <div class="contact-details">
+    <h5>Contact Details</h5>
+    <p>Email: lavanyapidikiti.24cs@licet.ac.in</p>
+    <p>Phone: 6383664366</p>
+  </div>
+
+  <div class="query-section">
+    <h5>Submit Your Query</h5>
+    <textarea id="query" rows="4" placeholder="Your Query"></textarea>
+    <p class="error-message" style="display: none;"></p>
+    <p class="success-message" style="display: none;"></p>
+    <button class="submit-button" onclick="handleQuerySubmit()">Submit Query</button>
+  </div>
+
+  <script>
+    function handleQuerySubmit() {
+      var query = document.getElementById('query').value;
+      var errorMessageElement = document.querySelector('.error-message');
+      var successMessageElement = document.querySelector('.success-message');
+      if (query.trim() === '') {
+        errorMessageElement.innerText = 'Please enter your query before submitting';
+        errorMessageElement.style.display = 'block';
+        successMessageElement.style.display = 'none';
+      } else {
+        successMessageElement.innerText = 'Query submitted successfully!';
+        successMessageElement.style.display = 'block';
+        errorMessageElement.style.display = 'none';
+        document.getElementById('query').value = '';
+      }
+    }
+  </script>
+</body>
+
+</html>

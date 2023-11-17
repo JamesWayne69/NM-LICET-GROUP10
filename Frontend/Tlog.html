@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction Log</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+#app-bar {
+      background-color: #1976D2; /* Material-UI primary color */
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #nav-links {
+      display: flex;
+    }
+
+    #nav-links a {
+      color: white;
+      margin-right: 15px;
+      text-decoration: none;
+    }
+
+    #content-container {
+      max-width: 800px;
+      margin: 20px auto;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app-bar">
+    <div>Nova Banking</div>
+    <div id="nav-links">
+      <a href="home.html" style="color: white; margin-right: 15px;">Home</a>
+      <a href="about.html" style="color: white; margin-right: 15px;">About</a>
+      <a href="help.html" style="color: white; margin-right: 15px;">Help</a>
+      <a href="signout.html" style="color: white;">Sign Out</a>
+    </div>
+  </div>
+
+  <div id="content-container">
+    <h2>Transaction Log</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>From Account</th>
+          <th>Name</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Credit</td>
+          <td>Savings</td>
+          <td>John Doe</td>
+          <td>$500</td>
+        </tr>
+        <tr>
+          <td>Debit</td>
+          <td>Checking</td>
+          <td>Jane Smith</td>
+          <td>$200</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>
