@@ -127,6 +127,37 @@ We would require the bank's existing customer details to create the multi-bankin
 **3 External interface requirements**
 
  **3.1 GUI**
+ 
+ 1. **Login Page**
+- Clearly labeled text fields for users to enter their username and password.
+- Placeholder text within the fields to guide users.
+- A prominent button labeled "Login" to initiate the login process.
+- A link or button for users to recover/reset their password.
+- An option to remember the user's login credentials for future sessions.
+- Clear error messages for incorrect login attempts.
+- Indication of password strength if applicable.
+- A link or button to navigate to the registration page for new users.
+
+
+
+
+2. **Transaction Nexus**
+- Display the user's account information, including balance.
+- Input field for the deposit amount.
+- Deposit button to initiate the transaction.
+- Input field for the withdrawal amount.
+- Withdraw button to initiate the transaction.
+- Display a confirmation message after a successful deposit or withdrawal.
+- Clear messages for insufficient funds or other transaction errors.
+- Link to view the transaction history.
+
+3. **Transaction History**
+- Display a table with Date, Transaction Type, Amount, and Balance After Transaction.
+- Allow users to filter and sort transactions based on date, type, or amount.
+- If there are a large number of transactions, include pagination controls.
+- Provide a search bar to allow users to search for specific transactions.
+- Include a link to easily navigate back to the main dashboard.
+
 
  **4 System features**
    1. **User authentication and Security:**
