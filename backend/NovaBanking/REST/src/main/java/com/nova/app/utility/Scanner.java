@@ -1,4 +1,4 @@
-package com.idms.app.utility;
+package com.nova.app.utility;
 
 import org.springframework.context.annotation.ComponentScan;
 import java.lang.annotation.*;

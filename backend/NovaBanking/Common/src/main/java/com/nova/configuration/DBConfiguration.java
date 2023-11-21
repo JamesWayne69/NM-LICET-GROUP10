@@ -1,4 +1,4 @@
-package com.idms.configuration;
+package com.nova.configuration;
 
 import javax.sql.DataSource;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.idms.configuration.properties.DBProperties;
+import com.nova.configuration.properties.DBProperties;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration

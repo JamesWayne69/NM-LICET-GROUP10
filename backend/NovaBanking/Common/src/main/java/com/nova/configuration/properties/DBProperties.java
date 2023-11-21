@@ -1,4 +1,4 @@
-package com.idms.configuration.properties;
+package com.nova.configuration.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
