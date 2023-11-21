@@ -5,6 +5,7 @@ public class AuthenticationModel {
 	private String accountID;
 	private String password;
 	
+	
 	public String getAccountID() {
 		return accountID;
 	}
@@ -17,5 +18,6 @@ public class AuthenticationModel {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	
 }

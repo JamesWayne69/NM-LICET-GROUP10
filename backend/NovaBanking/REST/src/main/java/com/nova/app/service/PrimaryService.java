@@ -1,13 +1,12 @@
 package com.nova.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import com.nova.app.repository.PrimaryRepository;
 import com.nova.exceptions.AuthenticationException;
 import com.nova.model.AuthenticationModel;
+import com.nova.model.GenericStatusCode;
 
 
 
@@ -15,15 +14,13 @@ import com.nova.model.AuthenticationModel;
 public class PrimaryService {
 	
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	private PrimaryRepository primaryRepository;
 	
-	private final String validateUser = "SELECT COUNT(*) FROM account WHERE account_id = ? AND password = ?";
-	
-	public HttpStatus verifyUser(@RequestBody AuthenticationModel auth) {
-	    int count = jdbcTemplate.queryForObject(validateUser, Integer.class, auth.getAccountID(), auth.getPassword());
-	    if (count>0)
-	    	return HttpStatus.OK;
-	    else
-	    	throw new AuthenticationException();
+	public GenericStatusCode verifyUser(AuthenticationModel auth) {
+		if (primaryRepository.verifyUser(auth))
+			return new GenericStatusCode(200);
+		else
+			throw new AuthenticationException();
+
 	}
 }
