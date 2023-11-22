@@ -9,6 +9,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.nova.exceptions.AuthenticationException;
+import com.nova.exceptions.PhoneNumberException;
+import com.nova.exceptions.SignUpException;
 import com.nova.model.ErrorResponse;
 import com.nova.utility.enums.SecurityCode;
 
@@ -22,12 +24,25 @@ public class PrimaryHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(Generator(SecurityCode.AUTHORIZATIONERROR), HttpStatus.FORBIDDEN);
     }
     
+	@ResponseStatus(value=HttpStatus.FORBIDDEN)
+    @ExceptionHandler({SignUpException.class})
+    public ResponseEntity<ErrorResponse> handleSignUp(Exception ex,WebRequest Request) {
+        return new ResponseEntity<>(Generator(SecurityCode.SIGNUPERROR), HttpStatus.FORBIDDEN);
+    }
+	
+	@ResponseStatus(value=HttpStatus.FORBIDDEN)
+    @ExceptionHandler({PhoneNumberException.class})
+    public ResponseEntity<ErrorResponse> handlePhoneNumber(Exception ex,WebRequest Request) {
+        return new ResponseEntity<>(Generator(SecurityCode.PHONENUMBERERROR), HttpStatus.FORBIDDEN);
+    }
     
     @ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<ErrorResponse> handleGlobalException(Exception ex,WebRequest Request) {
         return new ResponseEntity<>(Generator(SecurityCode.RUNTIMEERROR), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    
+    
     
     public ErrorResponse Generator(SecurityCode Code) {
 		ErrorResponse responseModel = new ErrorResponse();
