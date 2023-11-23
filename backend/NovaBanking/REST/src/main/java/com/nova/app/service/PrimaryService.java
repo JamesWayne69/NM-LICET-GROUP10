@@ -9,6 +9,7 @@ import com.nova.exceptions.AuthenticationException;
 import com.nova.exceptions.PhoneNumberException;
 import com.nova.exceptions.SignUpException;
 import com.nova.model.AuthenticationModel;
+import com.nova.model.Balance;
 import com.nova.model.GenericStatusCode;
 import com.nova.model.SignUpModel;
 import com.nova.model.SignUpResponse;
@@ -27,6 +28,10 @@ public class PrimaryService {
 		else
 			throw new AuthenticationException();
 
+	}
+	
+	public Balance viewBalance(String accountID) {
+		return new Balance(200,primaryRepository.getBalance(accountID));
 	}
 	
 	public SignUpResponse createUser(SignUpModel signUp) {
