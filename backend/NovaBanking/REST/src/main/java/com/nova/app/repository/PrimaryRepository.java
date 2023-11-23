@@ -20,6 +20,9 @@ public class PrimaryRepository {
 	private final String accountID = "Select account_ID from accounts where phone_number = ?";
 	private final String balance = "Select balance from ACCOUNTS where account_id = ?";
 	private final String countPhoneNumber = "Select count(*) from accounts where phone_number = ?";
+	private final String countEmail = "Select count(*) from accounts where email = ?";
+	private final String addTransaction = "Insert into transactionhistory (accountID,transactionDate,TransactionType,Amount,RecipientName,RecipientAccountNumber,Balance) Values(?,CURRENT TIMESTAMP,?,?,?,?,?)";
+	private final String getTransactions = "Select accountID,TransactionDate,TransactionType,Amount,RecipientName,RecipientAccountNumber,Balance from transactionhistory where AccountID = ? or Recipientaccountnumber = ?";
 	
 	public Boolean verifyUser(AuthenticationModel auth) {
 	    int count = jdbcTemplate.queryForObject(validateUser, Integer.class, auth.getAccountID(), auth.getPassword());
@@ -51,8 +54,18 @@ public class PrimaryRepository {
 		return count >0;
 	}
 	
-	public Boolean addTransaction(String accountID,Transaction type,double amount, String recipientNam,String recipientID, double balance) {
-		return null;
+	public Boolean checkEmail(String email) {
+		int count = jdbcTemplate.queryForObject(countEmail, Integer.class, email);
+		return count >0;
+	}
+	
+	public Boolean addTransaction(String accountID,String type,double amount, String recipientName,String recipientID, double balance) {
+		int count = jdbcTemplate.update(addTransaction,accountID,type,amount,recipientName,recipientID,balance);
+		return count>0;
+		
+	}
+	
+	public void getTransactions(String accountID) {
 		
 	}
 }

@@ -4,6 +4,7 @@ package com.nova.utility.enums;
 public enum SecurityCode{
 	AUTHORIZATIONERROR(200,SecurityLevel.ERROR,"Check the Credentials"),
 	PHONENUMBERERROR(204,SecurityLevel.ERROR,"Phone Number Already Exists"),
+	EMAILERROR(205,SecurityLevel.ERROR,"Email Already Exists"),
 	SIGNUPERROR(202,SecurityLevel.ERROR,"Error in Creating User"),
 	RUNTIMEERROR(201,SecurityLevel.ERROR,"Contact support team if problem still persists"),
 	UNEXPECTEDERROR(203,SecurityLevel.ERROR,"Contact support team if problem still persists"),

@@ -9,6 +9,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.nova.exceptions.AuthenticationException;
+import com.nova.exceptions.EmailException;
 import com.nova.exceptions.PhoneNumberException;
 import com.nova.exceptions.SignUpException;
 import com.nova.model.ErrorResponse;
@@ -34,6 +35,12 @@ public class PrimaryHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({PhoneNumberException.class})
     public ResponseEntity<ErrorResponse> handlePhoneNumber(Exception ex,WebRequest Request) {
         return new ResponseEntity<>(Generator(SecurityCode.PHONENUMBERERROR), HttpStatus.FORBIDDEN);
+    }
+	
+	@ResponseStatus(value=HttpStatus.FORBIDDEN)
+    @ExceptionHandler({EmailException.class})
+    public ResponseEntity<ErrorResponse> handleEmail(Exception ex,WebRequest Request) {
+        return new ResponseEntity<>(Generator(SecurityCode.EMAILERROR), HttpStatus.FORBIDDEN);
     }
     
     @ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)

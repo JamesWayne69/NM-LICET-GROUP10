@@ -6,6 +6,7 @@ public class SignUpModel {
 	private String name;
 	private String password;
 	private String phoneNumber;
+	private String email;
 	
 	public String getName() {
 		return name;
@@ -25,7 +26,12 @@ public class SignUpModel {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	@Override
 	public String toString() {
 		return "SignUpModel [name=" + name + ", password=" + password + ", phoneNumber=" + phoneNumber + "]";

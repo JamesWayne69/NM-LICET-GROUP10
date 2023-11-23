@@ -1,4 +1,4 @@
-package com.idms.app;
+package com.nova.app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
