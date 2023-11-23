@@ -30,7 +30,7 @@ import com.nova.model.TransferDetails;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RequestMapping("/v1")
 public class MainController {
 	
