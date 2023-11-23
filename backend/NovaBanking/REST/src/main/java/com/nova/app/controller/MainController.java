@@ -35,8 +35,6 @@ public class MainController {
 	
 	@Autowired
 	private PrimaryService primaryService;
-	@Autowired
-	private PrimaryRepository pr;
 	
     @GetMapping("/hello")
     public String sayHello() {
