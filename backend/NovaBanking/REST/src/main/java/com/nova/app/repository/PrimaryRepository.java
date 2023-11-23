@@ -19,7 +19,6 @@ public class PrimaryRepository {
 	private final String createUser = "INSERT INTO ACCOUNTS (name,balance,password,phone_number) VALUES (?,0.00,?,?)";
 	private final String accountID = "Select account_ID from accounts where phone_number = ?";
 	private final String countPhoneNumber = "Select count(*) from accounts where phone_number = ?";
-	private final String balance = "Select balance from ACCOUNTS where account_id = ?";
 	
 	public Boolean verifyUser(AuthenticationModel auth) {
 	    int count = jdbcTemplate.queryForObject(validateUser, Integer.class, auth.getAccountID(), auth.getPassword());
@@ -33,10 +32,6 @@ public class PrimaryRepository {
 	
 	public String getAccountID(String phoneNumber) {
 		return jdbcTemplate.queryForObject(accountID, String.class, phoneNumber);
-	}
-	
-	public Double getBalance(String accountID) {
-		return jdbcTemplate.queryForObject(balance, Double.class, accountID);
 	}
 	
 	public Boolean checkPhoneNumber(String phoneNumber) {
