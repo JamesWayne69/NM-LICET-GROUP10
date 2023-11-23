@@ -1,2 +1,9 @@
 /.metadata/
 react/node_modules/
+backend/NovaBanking/.settings
+backend/NovaBanking/REST/target
+backend/NovaBanking/REST/.classpath
+backend/NovaBanking/REST/.project
+backend/NovaBanking/Common/target
+backend/NovaBanking/Common/.classpath
+backend/NovaBanking/Common/.project
