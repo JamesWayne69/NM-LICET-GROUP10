@@ -15,6 +15,7 @@ import com.nova.app.repository.PrimaryRepository;
 import com.nova.app.service.PrimaryService;
 import com.nova.app.utility.enums.Payment;
 import com.nova.model.AuthenticationModel;
+import com.nova.model.Balance;
 import com.nova.model.GenericStatusCode;
 import com.nova.model.SignUpModel;
 import com.nova.model.SignUpResponse;
@@ -49,6 +50,11 @@ public class MainController {
     public ResponseEntity<SignUpResponse>performTransaction(@PathVariable String accountID,@PathVariable Payment pay, @PathVariable double amount){
     	pr.performTransaction(accountID, pay,amount);
     	return null;
+    }
+    
+    @GetMapping("/balance/{accountID}")
+    public ResponseEntity<Balance>viewBalance(@PathVariable String accountID){
+        return new ResponseEntity<Balance>(primaryService.viewBalance(accountID),HttpStatus.OK);
     }
 
 }
