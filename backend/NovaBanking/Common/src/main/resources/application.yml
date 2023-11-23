@@ -6,7 +6,7 @@ spring:
     password: ltpBdOZs6OIiG4kP
   hikari:
     minimum-idle: 10
-    maximum-pool-size: 30
+    maximum-pool-size: 15
     idle-timeout: 30000 # in milliseconds (30 seconds)
     connectionTimeout: 30000
   jpa:
