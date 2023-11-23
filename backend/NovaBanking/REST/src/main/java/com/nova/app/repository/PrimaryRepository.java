@@ -1,13 +1,16 @@
 package com.nova.app.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.nova.app.utility.enums.Payment;
-import com.nova.app.utility.enums.Transaction;
 import com.nova.model.AuthenticationModel;
 import com.nova.model.SignUpModel;
+import com.nova.model.TransactionModel;
 
 @Component
 public class PrimaryRepository {
@@ -21,8 +24,9 @@ public class PrimaryRepository {
 	private final String balance = "Select balance from ACCOUNTS where account_id = ?";
 	private final String countPhoneNumber = "Select count(*) from accounts where phone_number = ?";
 	private final String countEmail = "Select count(*) from accounts where email = ?";
-	private final String addTransaction = "Insert into transactionhistory (accountID,transactionDate,TransactionType,Amount,RecipientName,RecipientAccountNumber,Balance) Values(?,CURRENT TIMESTAMP,?,?,?,?,?)";
-	private final String getTransactions = "Select accountID,TransactionDate,TransactionType,Amount,RecipientName,RecipientAccountNumber,Balance from transactionhistory where AccountID = ? or Recipientaccountnumber = ?";
+	private final String getName = "Select name from accounts where account_id = ?";
+	private final String addTransaction = "Insert into transactionhistory (accountID,transactionDate,TransactionType,Amount,CpartyName,CpartyID,Balance) Values(?,CURRENT TIMESTAMP,?,?,?,?,?)";
+	private final String getTransactions = "Select accountID,TransactionDate,TransactionType,Amount,CpartyName,CpartyID,Balance from transactionhistory where AccountID = ? order by TransactionDate desc";
 	
 	public Boolean verifyUser(AuthenticationModel auth) {
 	    int count = jdbcTemplate.queryForObject(validateUser, Integer.class, auth.getAccountID(), auth.getPassword());
@@ -40,6 +44,10 @@ public class PrimaryRepository {
 	
     public Double getBalance(String accountID) {
         return jdbcTemplate.queryForObject(balance, Double.class, accountID);
+    }
+    
+    public String getName(String accountID) {
+    	return jdbcTemplate.queryForObject(getName, String.class, accountID);
     }
 	
 	public Boolean checkPhoneNumber(String phoneNumber) {
@@ -65,7 +73,8 @@ public class PrimaryRepository {
 		
 	}
 	
-	public void getTransactions(String accountID) {
+	public List<TransactionModel> getTransactions(String accountID) {
+		return jdbcTemplate.query(getTransactions,new Object[] {accountID},new BeanPropertyRowMapper<>(TransactionModel.class));
 		
 	}
 }

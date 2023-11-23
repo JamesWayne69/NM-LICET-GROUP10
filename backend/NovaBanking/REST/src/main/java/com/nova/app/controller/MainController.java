@@ -1,6 +1,8 @@
 package com.nova.app.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +19,10 @@ import com.nova.app.utility.enums.Payment;
 import com.nova.model.AuthenticationModel;
 import com.nova.model.Balance;
 import com.nova.model.GenericStatusCode;
+import com.nova.model.LoginResponse;
 import com.nova.model.SignUpModel;
 import com.nova.model.SignUpResponse;
+import com.nova.model.TransactionModel;
 import com.nova.model.TransferDetails;
 
 
@@ -38,7 +42,7 @@ public class MainController {
     }
     
     @PostMapping("/login")
-    public ResponseEntity<GenericStatusCode> login(@RequestBody AuthenticationModel auth) {    	
+    public ResponseEntity<LoginResponse> login(@RequestBody AuthenticationModel auth) {    	
         return new ResponseEntity<>(primaryService.verifyUser(auth),HttpStatus.OK);
     }
     
@@ -60,6 +64,12 @@ public class MainController {
     @PostMapping("/transfer/{accountID}")
     public ResponseEntity<GenericStatusCode>performTransfer(@PathVariable String accountID,@RequestBody TransferDetails transfer){
     	return new ResponseEntity<>(primaryService.performTransfer(transfer, accountID),HttpStatus.OK);
+    }
+    
+    @GetMapping("/transactions/{accountID}")
+    public ResponseEntity<List<TransactionModel>>getTransactions(@PathVariable String accountID){
+    	//pr.getTransactions(accountID);
+    	return new ResponseEntity<>(primaryService.getTransactions(accountID),HttpStatus.OK);
     }
 
 }

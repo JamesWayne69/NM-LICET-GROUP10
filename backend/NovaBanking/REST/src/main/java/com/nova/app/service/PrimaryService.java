@@ -1,5 +1,7 @@
 package com.nova.app.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,10 @@ import com.nova.exceptions.SignUpException;
 import com.nova.model.AuthenticationModel;
 import com.nova.model.Balance;
 import com.nova.model.GenericStatusCode;
+import com.nova.model.LoginResponse;
 import com.nova.model.SignUpModel;
 import com.nova.model.SignUpResponse;
+import com.nova.model.TransactionModel;
 import com.nova.model.TransferDetails;
 
 
@@ -24,9 +28,11 @@ public class PrimaryService {
 	@Autowired
 	private PrimaryRepository primaryRepository;
 	
-	public GenericStatusCode verifyUser(AuthenticationModel auth) {
-		if (primaryRepository.verifyUser(auth))
-			return new GenericStatusCode(200);
+	public LoginResponse verifyUser(AuthenticationModel auth) {
+		if (primaryRepository.verifyUser(auth)) {
+			System.out.println("Here");
+			return new LoginResponse(200,primaryRepository.getName(auth.getAccountID()));
+		}
 		else
 			throw new AuthenticationException();
 
@@ -60,5 +66,10 @@ public class PrimaryService {
 		primaryRepository.addTransaction(accountID, "Transfer", transfer.getAmount(), transfer.getReceiverName(), transfer.getAccountID(), primaryRepository.getBalance(accountID));
 		primaryRepository.addTransaction(transfer.getAccountID(), "Transfer", transfer.getAmount(), transfer.getSenderName(), accountID, primaryRepository.getBalance(transfer.getAccountID()));
 		return new GenericStatusCode(200);
+	}
+	
+	public List<TransactionModel> getTransactions(String accountID){
+		return primaryRepository.getTransactions(accountID);
+		
 	}
 }
