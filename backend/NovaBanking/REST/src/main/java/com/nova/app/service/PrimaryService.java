@@ -14,6 +14,7 @@ import com.nova.model.Balance;
 import com.nova.model.GenericStatusCode;
 import com.nova.model.SignUpModel;
 import com.nova.model.SignUpResponse;
+import com.nova.model.TransferDetails;
 
 
 
@@ -47,12 +48,17 @@ public class PrimaryService {
 		else
 			throw new SignUpException();
 	}
-	public GenericStatusCode performTransaction(String accountID,Payment pay,int amount) {
+	public GenericStatusCode performTransaction(String accountID,Payment pay,double amount) {
 		primaryRepository.performTransaction(accountID, pay,amount);
-		
-			
-		
-				
-		return null;
+		primaryRepository.addTransaction(accountID, pay.getMode(), amount, accountID, accountID, primaryRepository.getBalance(accountID));
+		return new GenericStatusCode(200);
+	}
+	
+	public GenericStatusCode performTransfer(TransferDetails transfer, String accountID) {
+		primaryRepository.performTransaction(accountID, Payment.WITHDRAW, transfer.getAmount());
+		primaryRepository.performTransaction(transfer.getAccountID(), Payment.DEPOSIT, transfer.getAmount());
+		primaryRepository.addTransaction(accountID, "Transfer", transfer.getAmount(), transfer.getReceiverName(), transfer.getAccountID(), primaryRepository.getBalance(accountID));
+		primaryRepository.addTransaction(transfer.getAccountID(), "Transfer", transfer.getAmount(), transfer.getSenderName(), accountID, primaryRepository.getBalance(transfer.getAccountID()));
+		return new GenericStatusCode(200);
 	}
 }

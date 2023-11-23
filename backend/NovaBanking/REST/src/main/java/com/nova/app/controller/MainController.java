@@ -19,6 +19,7 @@ import com.nova.model.Balance;
 import com.nova.model.GenericStatusCode;
 import com.nova.model.SignUpModel;
 import com.nova.model.SignUpResponse;
+import com.nova.model.TransferDetails;
 
 
 @RestController
@@ -47,14 +48,18 @@ public class MainController {
     }
     
     @GetMapping("/{accountID}/{pay}/{amount}")
-    public ResponseEntity<SignUpResponse>performTransaction(@PathVariable String accountID,@PathVariable Payment pay, @PathVariable double amount){
-    	pr.performTransaction(accountID, pay,amount);
-    	return null;
+    public ResponseEntity<GenericStatusCode>performTransaction(@PathVariable String accountID,@PathVariable Payment pay, @PathVariable double amount){
+    	return new ResponseEntity<>(primaryService.performTransaction(accountID, pay, amount),HttpStatus.OK);
     }
     
     @GetMapping("/balance/{accountID}")
     public ResponseEntity<Balance>viewBalance(@PathVariable String accountID){
         return new ResponseEntity<Balance>(primaryService.viewBalance(accountID),HttpStatus.OK);
+    }
+    
+    @PostMapping("/transfer/{accountID}")
+    public ResponseEntity<GenericStatusCode>performTransfer(@PathVariable String accountID,@RequestBody TransferDetails transfer){
+    	return new ResponseEntity<>(primaryService.performTransfer(transfer, accountID),HttpStatus.OK);
     }
 
 }
