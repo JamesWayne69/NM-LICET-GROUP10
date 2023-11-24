@@ -69,7 +69,7 @@ public class PrimaryService {
 	}
 	public GenericStatusCode performTransaction(String accountID,Payment pay,double amount) {
 		primaryRepository.performTransaction(accountID, pay,amount);
-		primaryRepository.addTransaction(accountID, pay.getMode(), amount, accountID, accountID, primaryRepository.getBalance(accountID));
+		primaryRepository.addTransaction(accountID, pay.getMode(), amount, "SELF", "SELF", primaryRepository.getBalance(accountID));
 		return new GenericStatusCode(200);
 	}
 	

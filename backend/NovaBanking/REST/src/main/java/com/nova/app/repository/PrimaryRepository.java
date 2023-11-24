@@ -21,7 +21,7 @@ public class PrimaryRepository {
 	JdbcTemplate jdbcTemplate;
 	
 	private final String validateUser = "SELECT COUNT(*) FROM accounts WHERE account_id = ? AND password = ?";
-	private final String createUser = "INSERT INTO ACCOUNTS (name,balance,password,phone_number) VALUES (?,0.00,?,?)";
+	private final String createUser = "INSERT INTO ACCOUNTS (name,balance,password,phone_number,email) VALUES (?,0.00,?,?,?)";
 	private final String accountID = "Select account_ID from accounts where phone_number = ?";
 	private final String balance = "Select balance from ACCOUNTS where account_id = ?";
 	private final String getBeneficiary = "Select count(account_id) from ACCOUNTS where account_id = ?";
@@ -39,7 +39,7 @@ public class PrimaryRepository {
 	}
 	
 	public Boolean createUser(SignUpModel signUp) {
-		int count = jdbcTemplate.update(createUser, signUp.getName(), signUp.getPassword(),signUp.getPhoneNumber());
+		int count = jdbcTemplate.update(createUser, signUp.getName(), signUp.getPassword(),signUp.getPhoneNumber(),signUp.getEmail());
 		return count>0;
 	}
 	
