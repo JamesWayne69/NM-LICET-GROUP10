@@ -19,6 +19,8 @@ import com.nova.app.service.PrimaryService;
 import com.nova.app.utility.enums.Payment;
 import com.nova.model.AuthenticationModel;
 import com.nova.model.Balance;
+import com.nova.model.Beneficiary;
+import com.nova.model.BeneficiaryList;
 import com.nova.model.GenericStatusCode;
 import com.nova.model.LoginResponse;
 import com.nova.model.SignUpModel;
@@ -70,6 +72,16 @@ public class MainController {
     public ResponseEntity<List<TransactionModel>>getTransactions(@PathVariable String accountID){
     	//pr.getTransactions(accountID);
     	return new ResponseEntity<>(primaryService.getTransactions(accountID),HttpStatus.OK);
+    }
+    
+    @GetMapping("/beneficiaries/{accountID}")
+    public ResponseEntity<List<BeneficiaryList>> getBeneficiaries(@PathVariable String accountID){
+    	return new ResponseEntity<>(primaryService.getBeneficiaries(accountID),HttpStatus.OK);
+    }
+    
+    @PostMapping("/add")
+    public ResponseEntity<GenericStatusCode> addBeneficiary(@RequestBody Beneficiary beneficiary){
+        return new ResponseEntity<>(primaryService.addBeneficiary(beneficiary),HttpStatus.OK);
     }
 
 }

@@ -8,11 +8,14 @@ import org.springframework.stereotype.Service;
 import com.nova.app.repository.PrimaryRepository;
 import com.nova.app.utility.enums.Payment;
 import com.nova.exceptions.AuthenticationException;
+import com.nova.exceptions.BeneficiaryNotFound;
 import com.nova.exceptions.EmailException;
 import com.nova.exceptions.PhoneNumberException;
 import com.nova.exceptions.SignUpException;
 import com.nova.model.AuthenticationModel;
 import com.nova.model.Balance;
+import com.nova.model.Beneficiary;
+import com.nova.model.BeneficiaryList;
 import com.nova.model.GenericStatusCode;
 import com.nova.model.LoginResponse;
 import com.nova.model.SignUpModel;
@@ -40,6 +43,16 @@ public class PrimaryService {
 	
 	public Balance viewBalance(String accountID) {
         return new Balance(200,primaryRepository.getBalance(accountID));
+    }
+	
+	public GenericStatusCode addBeneficiary(Beneficiary beneficiary) {
+        
+        if(primaryRepository.verifyBeneficiary(beneficiary)) {
+            primaryRepository.createBeneficiary(beneficiary);
+            return new GenericStatusCode(200);
+        }
+        else
+            throw new BeneficiaryNotFound();
     }
 	
 	public SignUpResponse createUser(SignUpModel signUp) {
@@ -71,5 +84,9 @@ public class PrimaryService {
 	public List<TransactionModel> getTransactions(String accountID){
 		return primaryRepository.getTransactions(accountID);
 		
+	}
+	
+	public List<BeneficiaryList> getBeneficiaries(String accountID){
+		return primaryRepository.getBeneficiaries(accountID);
 	}
 }

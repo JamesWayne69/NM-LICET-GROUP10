@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.nova.app.utility.enums.Payment;
 import com.nova.model.AuthenticationModel;
+import com.nova.model.Beneficiary;
+import com.nova.model.BeneficiaryList;
 import com.nova.model.SignUpModel;
 import com.nova.model.TransactionModel;
 
@@ -22,11 +24,14 @@ public class PrimaryRepository {
 	private final String createUser = "INSERT INTO ACCOUNTS (name,balance,password,phone_number) VALUES (?,0.00,?,?)";
 	private final String accountID = "Select account_ID from accounts where phone_number = ?";
 	private final String balance = "Select balance from ACCOUNTS where account_id = ?";
+	private final String getBeneficiary = "Select count(account_id) from ACCOUNTS where account_id = ?";
+    private final String addBeneficiary = "INSERT INTO BENEFICIARIES(accountID_User, accountID_Beneficiary, Name, IFSC_Code) VALUES (?,?,?,?)";
 	private final String countPhoneNumber = "Select count(*) from accounts where phone_number = ?";
 	private final String countEmail = "Select count(*) from accounts where email = ?";
 	private final String getName = "Select name from accounts where account_id = ?";
 	private final String addTransaction = "Insert into transactionhistory (accountID,transactionDate,TransactionType,Amount,CpartyName,CpartyID,Balance) Values(?,CURRENT TIMESTAMP,?,?,?,?,?)";
 	private final String getTransactions = "Select accountID,TransactionDate,TransactionType,Amount,CpartyName,CpartyID,Balance from transactionhistory where AccountID = ? order by TransactionDate desc";
+	private final String getBeneficiaries = "Select accountID_Beneficiary, Name from Beneficiaries where accountID_User = ?";
 	
 	public Boolean verifyUser(AuthenticationModel auth) {
 	    int count = jdbcTemplate.queryForObject(validateUser, Integer.class, auth.getAccountID(), auth.getPassword());
@@ -55,6 +60,16 @@ public class PrimaryRepository {
 		return count >0;
 	}
 	
+	public Boolean verifyBeneficiary(Beneficiary beneficiary) {
+        int count = jdbcTemplate.queryForObject(getBeneficiary, Integer.class, beneficiary.getAccountIDBeneficiary());
+        return count>0;
+    }
+    
+    public Boolean createBeneficiary(Beneficiary beneficiary) {
+        int count = jdbcTemplate.update(addBeneficiary, beneficiary.getAccountIDUser(), beneficiary.getAccountIDBeneficiary(), beneficiary.getName(), beneficiary.getIfscCode());
+        return count>0;
+    }  
+	
 	public Boolean performTransaction(String accountID, Payment pay, double amount) {
 		String updateCash = "update accounts set Balance = Balance";
 		updateCash += pay.getSign(amount) + " where account_id = ?";
@@ -76,5 +91,9 @@ public class PrimaryRepository {
 	public List<TransactionModel> getTransactions(String accountID) {
 		return jdbcTemplate.query(getTransactions,new Object[] {accountID},new BeanPropertyRowMapper<>(TransactionModel.class));
 		
+	}
+	
+	public List<BeneficiaryList> getBeneficiaries(String accountID){
+		return jdbcTemplate.query(getBeneficiaries, new Object[] {accountID}, new BeanPropertyRowMapper<>(BeneficiaryList.class));
 	}
 }
